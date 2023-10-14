@@ -1,0 +1,67 @@
+server:
+  port: 8081
+
+spring:
+#  profiles:
+#    active: prod
+
+  config:
+    import: optional:configserver:http://localhost:8085
+  application:
+    name: USER-SERVICE
+  datasource:
+    username: root
+    password: Pa$$w0rd@123
+    url: jdbc:mysql://localhost:3306/user-service
+    
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    
+management:
+  health:
+    circuitbreakers:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+  endpoint:
+    health:
+      show-details: always
+
+      
+resilience4j:
+  circuitbreaker:
+    instances:
+      ratingHotelBreaker:
+        registerHealthIndicator: true
+        eventConsumerBufferSize: 10
+        failureRateThreshold: 50
+        minimumNumberOfCalls: 5
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 6s
+        permittedNumberOfCallsInHalfOpenState: 3
+        slidingWindowSize: 10
+        slidingWindowType: COUNT_BASED
+        
+  retry:
+    instances:
+      ratingHotelService:
+        max-attempts: 3
+        wait-duration: 5s
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+
+
+  

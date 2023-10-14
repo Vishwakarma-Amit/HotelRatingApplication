@@ -1,0 +1,11 @@
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    
+spring:
+  application:
+    name: CONFIG-SERVER
+    
+server:
+  port: 8085

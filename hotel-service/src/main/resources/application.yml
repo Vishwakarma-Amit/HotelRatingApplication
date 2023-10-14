@@ -1,0 +1,29 @@
+server:
+  port: 8082
+
+spring:
+  config:
+    import: optional:configserver:http://localhost:8085
+  application:
+    name: HOTEL-SERVICE
+  datasource:
+    username: root
+    password: Pa$$w0rd@123
+    url: jdbc:mysql://localhost:3306/hotel-service
+    
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    
+    
+# Okta configuration for API gateway         
+          
+okta:
+  oauth2:
+    issuer: https://dev-79418932.okta.com/oauth2/default
+    audience: api://default
+    
+    
+
+  

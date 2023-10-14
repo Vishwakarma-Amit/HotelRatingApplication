@@ -1,0 +1,27 @@
+server:
+  port: 8084
+  
+spring:
+  config:
+    import: configserver:http://localhost:8085
+  application:
+    name: API-GATEWAY
+    
+  cloud:
+    gateway:
+      routes:
+        - id: USER-SERVICE
+          uri: lb://USER-SERVICE
+          predicates:
+          - Path=/users/**
+          
+        - id: RATING-SERVICE
+          uri: lb://RATING-SERVICE
+          predicates:
+          - Path=/ratings/**
+          
+        - id: HOTEL-SERVICE
+          uri: lb://HOTEL-SERVICE
+          predicates:
+          - Path=/hotels/**, /staffs/**
+        

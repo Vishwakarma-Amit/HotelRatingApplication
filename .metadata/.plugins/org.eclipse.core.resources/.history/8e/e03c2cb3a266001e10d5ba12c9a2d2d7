@@ -1,0 +1,5 @@
+package com.user.service.interceptor;
+
+public class RestInterceptor {
+
+}
